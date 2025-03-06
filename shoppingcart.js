@@ -61,7 +61,7 @@ $(document).ready(function () {
     // Escoltem per clics en els botons de borrar
     $('.btn-outline-danger').on('click', borrarProducte);
 
-    // Variable per controlar si el promocode està aplicat
+    // Variable per controlar si el descompte està aplicat
     let promoAplicat = false;
 
     // Funció per gestionar el codi promocional
@@ -69,14 +69,14 @@ $(document).ready(function () {
         const codiEntrat = $('input[type="text"]').val();
         const filaPromo = $('.no-apply');
 
-        if (codiEntrat === 'PROMO1000' && !promoAplicat) {
+        if (codiEntrat == 'PROMO1000' && !promoAplicat) {
             // Mostrar fila de promo amb efecte slideDown
             filaPromo.slideDown(400);
             promoAplicat = true;
 
             // Actualitzar totals amb descompte
             actualitzarTotalsAmbDescompte();
-        } else if (codiEntrat === 'PROMO1000' && promoAplicat) {
+        } else if (codiEntrat == 'PROMO1000' && promoAplicat) {
             // No fer res si el mateix codi ja està aplicat
             $('input[type="text"]').val('');
         } else if (promoAplicat) {
@@ -117,7 +117,7 @@ $(document).ready(function () {
         $('.list-group-item:last strong').text(total.toFixed(2) + '€');
     }
 
-    // Escoltar el clic al botó Redeem
+    // Escoltar el clic al botó 
     $('.btn-secondary').on('click', gestionarCodiPromocional);
 
     // Funció per mostrar el resum de la compra al modal
@@ -132,7 +132,7 @@ $(document).ready(function () {
         if (subtotal == "0€") {
             alert("No hi han productes per comprar");
         } else {
-            
+
             // Crear el contingut HTML pel modal
             let contingutModal = `
             <p><strong>Resum de la seva compra:</strong></p>
@@ -156,7 +156,7 @@ $(document).ready(function () {
         }
     }
 
-    // Escoltar el clic al botó Checkout
+    // Escoltar el clic 
     $('.btn-success').on('click', mostrarResumCompra);
 
 
