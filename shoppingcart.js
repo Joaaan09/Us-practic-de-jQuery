@@ -120,4 +120,44 @@ $(document).ready(function () {
     // Escoltar el clic al botó Redeem
     $('.btn-secondary').on('click', gestionarCodiPromocional);
 
+    // Funció per mostrar el resum de la compra al modal
+    function mostrarResumCompra() {
+        // Obtenir els valors actuals
+        const subtotal = $('.list-group-item:first .text-muted').text();
+        const tax = $('.list-group-item:nth-child(2) .text-muted').text();
+        const shipping = $('.list-group-item:nth-child(3) .text-muted').text();
+        const total = $('.list-group-item:last strong').text();
+
+        // Si no hi han productes no es pordà accedir al apartat de compra
+        if (subtotal == "0€") {
+            alert("No hi han productes per comprar");
+        } else {
+            
+            // Crear el contingut HTML pel modal
+            let contingutModal = `
+            <p><strong>Resum de la seva compra:</strong></p>
+            <p>Subtotal: ${subtotal}</p>
+            <p>IVA (${tax}): ${parseFloat(subtotal) * 0.05}€</p>
+            <p>Enviament: ${shipping}</p>
+        `;
+
+            // Afegir línia de descompte si està aplicat
+            if (promoAplicat) {
+                contingutModal += `<p class="text-success">Descompte aplicat: -5€</p>`;
+            }
+
+            contingutModal += `<p><strong>Total: ${total}</strong></p>`;
+
+            // Actualitzar el contingut del modal
+            $('.modal-body').html(contingutModal);
+
+            // Mostrar el modal
+            $('#payment_modal').modal('show');
+        }
+    }
+
+    // Escoltar el clic al botó Checkout
+    $('.btn-success').on('click', mostrarResumCompra);
+
+
 });
